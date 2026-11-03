@@ -1,0 +1,31 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main() {
+    string src, dst;
+    cout << "Enter source file name: ";
+    cin >> src;
+    cout << "Enter destination file name: ";
+    cin >> dst;
+
+    ifstream in(src, ios::binary);
+    if (!in) {
+        cout << "Cannot open source file.\n";
+        return 1;
+    }
+
+    ofstream out(dst, ios::binary);
+    if (!out) {
+        cout << "Cannot open destination file.\n";
+        return 1;
+    }
+
+    out << in.rdbuf();
+
+    in.close();
+    out.close();
+
+    cout << "File copied successfully.\n";
+}
